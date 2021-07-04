@@ -6,11 +6,13 @@ basedir = abspath(dirname(__file__))
 
 
 class Config:
-    SECRET_KEY = environ.get("SECRET_KEY")
+    SECRET_KEY = environ.get("SECRET_KEY", "123456")
     MAIL_SERVER = environ.get("MAIL_SERVER", "smtp.googlemail.com")
     MAIL_PORT = environ.get("MAIL_PORT", "587")
     MAIL_USE_TLS = environ.get("MAIL_USE_TLS", "true").lower() in \
         ["true", "on", "1"]
+    MAIL_USER_NAME = environ.get("MAIL_USER_NAME")
+    MAIL_PASSWORD = environ.get("MAIL_PASSWORD")
     SSL_REDIRECT = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
@@ -19,7 +21,7 @@ class Config:
         pass
 
 
-class DevConfig(Config):
+class DevelopmentConfig(Config):
     ENV = "development"
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = environ.get(
@@ -27,13 +29,13 @@ class DevConfig(Config):
     )
 
 
-class ProdConfig(Config):
+class ProductionConfig(Config):
     ENV = 'production'
     SQLALCHEMY_DATABASE_URI = environ.get("PROD_DB")
 
 
 config = {
-    'dev': DevConfig,
-    'prod': ProdConfig,
-    'default': DevConfig
+    'development': DevelopmentConfig,
+    'production': ProductionConfig,
+    'default': DevelopmentConfig
 }
