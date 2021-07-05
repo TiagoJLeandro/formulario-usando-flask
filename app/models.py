@@ -6,9 +6,11 @@ class User(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64))
+    name = db.Column(db.String(64), nullable=False)
     password_hash = db.Column(db.String)
+    email = db.Column(db.String(128), unique=True, nullable=False)
     enable = db.Column(db.Boolean, default=False)
+    address = db.relationship('Address', backref='users', lazy=True)
 
     @property
     def password(self):
@@ -21,3 +23,27 @@ class User(db.Model):
     
     def verify_password(self, password) -> bool:
         return check_password_hash(self.password_hash, password)
+    
+    def __repr__(self):
+        return f"User(Id: {self.id}, Name: {self.name}, " \
+               f"Email: {self.email}, Enable: {self.enable})"
+
+
+class Address(db.Model):
+    __tablename__ = "address"
+
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id'),
+        primary_key=True
+    )
+    cep = db.Column(db.String(8))
+    rua = db.Column(db.String(128))
+    bairro = db.Column(db.String(128))
+    cidade = db.Column(db.String(128))
+    uf = db.Column(db.String(2))
+
+    def __repr__(self):
+        return f"Address(User_id: {self.user_id}, CEP: {self.cep}, " \
+               f"Rua: {self.rua}, Bairro: {self.bairro}, " \
+               f"Cidade: {self.cidade}, UF: {self.uf})"
