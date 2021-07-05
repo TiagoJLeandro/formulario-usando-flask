@@ -9,7 +9,7 @@ class User(db.Model):
     name = db.Column(db.String(64), nullable=False)
     password_hash = db.Column(db.String)
     email = db.Column(db.String(128), unique=True, nullable=False)
-    enable = db.Column(db.Boolean, default=False)
+    enable = db.Column(db.Boolean, default=False, nullable=True)
     address = db.relationship('Address', backref='users', lazy=True)
 
     @property
@@ -37,13 +37,14 @@ class Address(db.Model):
         db.ForeignKey('users.id'),
         primary_key=True
     )
-    cep = db.Column(db.String(8))
-    rua = db.Column(db.String(128))
-    bairro = db.Column(db.String(128))
-    cidade = db.Column(db.String(128))
-    uf = db.Column(db.String(2))
+    cep = db.Column(db.String(8), nullable=True)
+    rua = db.Column(db.String(128), nullable=True)
+    bairro = db.Column(db.String(128), nullable=True)
+    cidade = db.Column(db.String(128), nullable=True)
+    uf = db.Column(db.String(2), nullable=True)
 
     def __repr__(self):
         return f"Address(User_id: {self.user_id}, CEP: {self.cep}, " \
                f"Rua: {self.rua}, Bairro: {self.bairro}, " \
                f"Cidade: {self.cidade}, UF: {self.uf})"
+               
