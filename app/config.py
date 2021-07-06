@@ -13,6 +13,7 @@ class Config:
         ["true", "on", "1"]
     MAIL_USER_NAME = environ.get("MAIL_USER_NAME")
     MAIL_PASSWORD = environ.get("MAIL_PASSWORD")
+    MAIL_SUBJECT_PREFIX = environ.get("MAIL_SUBJECT_PREFIX", "Olá, ")
     SSL_REDIRECT = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
