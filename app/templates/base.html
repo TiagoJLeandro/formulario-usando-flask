@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% block head %}
+        {% endblock %}
+        <title>{% block title %}Site Ficticio{% endblock %}</title>
+    </head>
+    <body class="all">
+        <header class="header header--skin">
+            <h1 class="title title--skin">
+                <a href="#" class="title-link title-link--skin">Exemplo</a>
+            </h1>
+            {% block header %}
+            {% endblock %}
+        </header>
+        <seciton class="content content--skin">
+            {% block content %}
+            {% endblock %}
+        </seciton>
+        <footer class="footer footer--skin">
+            {% block footer %}
+            {% endblock %}
+        </footer>
+    </body>
+</html>
