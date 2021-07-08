@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="#" class="form form--skin" name="formLogin">
+    {{form.hidden_tag()}}
+    <label for="email">
+        Email:
+    </label>
+    {{form.email(id='email', autocomplete='off', maxlength="128", type="email")}}
+    <label for="password">
+        Senha:
+    </label>
+    {{form.password(id='password', autocomplete='off', minlength="5", maxlength="20")}}
+    <input type="submit" value="Entrar">
+    <label for="remember-me">
+        Lembrar:
+    </label>
+    {{form.remember_me(type="checkbox", id="remember-me", value="true")}}
+</form>
+
+{% endblock %}
