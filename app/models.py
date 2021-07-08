@@ -1,8 +1,9 @@
 from werkzeug.security import generate_password_hash, check_password_hash
-from . import db
+from flask_login import UserMixin
+from . import db, login_manager
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -47,4 +48,8 @@ class Address(db.Model):
         return f"Address(User_id: {self.user_id}, CEP: {self.cep}, " \
                f"Rua: {self.rua}, Bairro: {self.bairro}, " \
                f"Cidade: {self.cidade}, UF: {self.uf})"
-               
+
+
+@login_manager.user_loader
+def loader_user(user_id):
+    return User.query.filter_by(id=user_id)
