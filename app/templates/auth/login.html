@@ -2,21 +2,26 @@
 
 {% block content %}
 
-<form action="#" class="form form--skin" name="formLogin">
-    {{form.hidden_tag()}}
-    <label for="email">
-        Email:
-    </label>
-    {{form.email(id='email', autocomplete='off', maxlength="128", type="email")}}
-    <label for="password">
-        Senha:
-    </label>
-    {{form.password(id='password', autocomplete='off', minlength="5", maxlength="20")}}
-    <label for="remember-me">
-        Lembrar:
-    </label>
-    {{form.remember_me(type="checkbox", id="remember-me", value="true")}}
-    <input type="submit" value="Entrar">
+<form action="{{url_for('auth.login')}}" class="form form--skin" name="formLogin">
+    <fieldset class="fieldset fieldset--skin">
+        <legend class="form__legend form__legend--skin">Login</legend>
+        {{form.hidden_tag()}}
+        <label for="email" class="form__label form__label--skin">
+            Email:
+        </label>
+        {{form.email(id='email', class="form__entry form__entry--skin", autocomplete='off', maxlength="128", type="email")}}
+        <label for="password" class="form__label form__label--skin">
+            Senha:
+        </label>
+        {{form.password(id='password', class="form__entry form__entry--skin", autocomplete='off', minlength="5", maxlength="20")}}
+        <label for="remember-me" class="form__label form__label--skin">
+            Lembrar:
+            {{form.remember_me(type="checkbox", id="remember-me", value="true")}}
+        </label>
+       
+        <input type="submit" value="Entrar">
+    </fieldset>
+    
 </form>
 
 {% endblock %}
