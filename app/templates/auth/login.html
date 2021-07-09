@@ -12,11 +12,11 @@
         Senha:
     </label>
     {{form.password(id='password', autocomplete='off', minlength="5", maxlength="20")}}
-    <input type="submit" value="Entrar">
     <label for="remember-me">
         Lembrar:
     </label>
     {{form.remember_me(type="checkbox", id="remember-me", value="true")}}
+    <input type="submit" value="Entrar">
 </form>
 
 {% endblock %}
