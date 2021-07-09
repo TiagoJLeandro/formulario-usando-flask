@@ -1,0 +1,40 @@
+@import 'colors';
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10.425em;
+    padding: 2.2em;
+    &--skin {
+        background: $blue;
+        border-bottom: 0.6em solid $gray;
+    }
+}
+
+.title__link {
+    font-family: 'Tourney', cursive;
+    font-weight: normal;
+    font-size: 2em;
+    &--skin {
+        color: $white;
+    }
+}
+
+.header__link {
+    display: block;
+    font-weight: bolder;
+    font-size: 1.3em;
+    padding: 0.4em 0.6em;
+    border-radius: 0.3em;
+    border: 0.3em solid $gray;
+    text-align: center;
+    &--skin {
+        background: $gray;
+        color: $white;
+        &:hover {
+            background: $white;
+            color: $gray;
+        }
+    }
+}
