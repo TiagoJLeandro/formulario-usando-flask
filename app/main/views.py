@@ -6,4 +6,4 @@ from flask import render_template
 @main.route("/", methods=['GET'])
 @login_required
 def index():
-    return render_template("main.html")
+    return render_template("main/main.html")
