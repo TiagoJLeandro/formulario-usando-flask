@@ -1,11 +1,13 @@
+@import 'colors';
+
 .all {
     display: flex;
     flex-direction: column;
-    min-width: 320px;
+    min-width: 350px;
 }
 
 .content {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     padding: 2.2em;
 }
