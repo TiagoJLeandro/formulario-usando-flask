@@ -8,7 +8,7 @@ class LoginForm(FlaskForm):
     password = PasswordField(
         validators=[
             DataRequired(),
-            Length(5, 20)
+            Length(3, 20)
         ]
     )
     remember_me = BooleanField()
