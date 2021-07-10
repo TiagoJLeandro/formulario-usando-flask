@@ -2,7 +2,13 @@
 
 {% block content %}
 
-<form action="{{url_for('auth.login')}}" class="form form--skin" name="formLogin">
+{% for msg in get_flashed_messages() %}
+            <div class="error error--skin">
+                <span class="error__text error__text--skin">{{msg}} <sup> X</sup></span>
+            </div>
+{% endfor %}
+
+<form action="{{url_for('auth.login')}}" class="form form--skin" name="formLogin" method="POST">
     <fieldset class="fieldset fieldset--skin">
         <legend class="form__legend form__legend--skin">Login</legend>
         {{form.hidden_tag()}}
@@ -13,15 +19,14 @@
         <label for="password" class="form__label form__label--skin">
             Senha:
         </label>
-        {{form.password(id='password', class="form__entry form__entry--skin", autocomplete='off', minlength="5", maxlength="20")}}
+        {{form.password(id='password', class="form__entry form__entry--skin", autocomplete='off', minlength="3", maxlength="20")}}
         <label for="remember-me" class="form__label form__label--skin">
             Lembrar:
             {{form.remember_me(type="checkbox", id="remember-me", value="true")}}
         </label>
-       
         <input class="btn btn--skin" type="submit" value="Entrar">
     </fieldset>
-    
 </form>
+
 
 {% endblock %}
