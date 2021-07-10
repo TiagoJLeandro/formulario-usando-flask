@@ -1,0 +1,43 @@
+@import 'colors';
+
+.error {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 40%;
+    right: 40%;
+    width: max-content;
+    cursor: pointer;
+    margin: 0 auto;
+    padding: 1.4em;
+    margin-top: 2em;
+    border: 0.3em solid transparent;
+    animation: animaError 0.3s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+    animation-delay: 1s;
+    &--skin {
+        background-color: $red;
+        &:hover {
+            border: 0.3em solid $yellow;
+            box-shadow: 2px 2px 2px -2px $yellow;
+        }
+    }
+}
+
+@keyframes animaError{
+    from {
+        transform: translateX(20px);
+    }
+    to {
+        transform: translateX(10px);
+    }
+}
+
+.error__text {
+    font-size: 1.5em;
+    font-weight: bolder;
+    &--skin {
+        color: $white;
+    }
+}
