@@ -52,4 +52,4 @@ class Address(db.Model):
 
 @login_manager.user_loader
 def loader_user(user_id):
-    return User.query.filter_by(id=user_id)
+    return User.query.get(int(user_id))
