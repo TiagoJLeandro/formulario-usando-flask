@@ -24,7 +24,7 @@
             {% if current_user.is_authenticated %}
                 <a href="{{url_for('auth.logout')}}" class="header__link header__link--skin header__link--logout">Sair</a>
             {% else %}
-                <a href="" class="header__link header__link--skin">Entrar</a>
+                <a href="{{url_for('auth.login')}}" class="header__link header__link--skin">Entrar</a>
             {% endif %}
 
             {% block header %}
