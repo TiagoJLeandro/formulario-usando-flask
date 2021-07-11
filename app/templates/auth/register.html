@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="{{url_for('auth.register')}}" class="form form--skin" name="formRegister" method="POST">
+    <fieldset class="fieldset fieldset--skin">
+        {{form.hidden_tag()}}
+        <legend class="form__legend form__legend--skin">
+            Cadastrar
+        </legend>
+        <label for="name" class="form__label form__label--skin">Nome:</label>
+        {{ form.name(class="form__entry form__entry--skin", id="name")}}
+        <label for="email" class="form__label form__label--skin">
+            Email:
+        </label>
+        {{form.email(class="form__entry form__entry--skin", id="email", autocomplete="off")}}
+        <label for="password" class="form__label form__label--skin">
+            Senha:
+        </label>
+        {{form.password(class="form__entry form__entry--skin", id="password")}}
+        <label for="password2" class="form__label form__label--skin">
+            Digite sua senha novamente:
+        </label>
+        {{form.password2(class='form__entry form__entry--skin', id="password2")}}
+
+        <input type="submit" value="Próximo >" class="btn btn--skin marginTop15">
+    </fieldset>
+</form>
+{% endblock %}
