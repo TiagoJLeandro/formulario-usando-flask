@@ -2,12 +2,6 @@
 
 {% block content %}
 
-{% for msg in get_flashed_messages() %}
-            <div class="error error--skin">
-                <span class="error__text error__text--skin">{{msg}} <sup> X</sup></span>
-            </div>
-{% endfor %}
-
 <form action="{{url_for('auth.login')}}" class="form form--skin" name="formLogin" method="POST">
     <fieldset class="fieldset fieldset--skin">
         <legend class="form__legend form__legend--skin">Login</legend>
@@ -24,11 +18,18 @@
             Lembrar:
             {{form.remember_me(type="checkbox", id="remember-me", value="true")}}
         </label>
-        <input class="btn btn--skin" type="submit" value="Entrar">
+        <input class="btn btn--skin" type="submit" id="entrar" value="Entrar">
     </fieldset>
     <a href="{{url_for('auth.register')}}" class="external_link external_link--skin">
         Novo usuário? Cadastrar...
     </a>
+    {% for msg in get_flashed_messages() %}
+        <div class="error error--skin">
+            <span class="error__text error__text--skin">{{msg}} <sup> X</sup></span>
+        </div>
+    {% endfor %}
+
+
 </form>
 
 {% endblock %}
