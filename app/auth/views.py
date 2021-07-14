@@ -28,9 +28,10 @@ def logout():
     return redirect(url_for('main.index'))
 
 
-@auth.route("/register")
+@auth.route("/register", methods=["GET", "POST"])
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
         pass
     return render_template("auth/register.html", form=form)
+    

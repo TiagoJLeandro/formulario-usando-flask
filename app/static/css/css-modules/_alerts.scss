@@ -1,23 +1,24 @@
 @import 'colors';
 
-.error {
-    position: fixed;
-    z-index: 100;
-    top: 0;
-    left: 40%;
-    right: 40%;
-    width: max-content;
+.error__text {
+    display: block;
+    width: 85%;
     cursor: pointer;
-    margin: 0 auto;
-    padding: 1.4em;
+    padding: 0.7em;
+    font-size: 1.4em;
     margin-top: 2em;
+    text-align: center;
+    font-weight: bolder;
+    border-radius: 0.3em;
+    opacity: 1;
+    transform: translateX(0);
     border: 0.3em solid transparent;
     animation: animaError 0.3s;
     animation-iteration-count: infinite;
     animation-direction: alternate-reverse;
-    animation-delay: 1s;
     &--skin {
         background-color: $red;
+        color: $white;
         &:hover {
             border: 0.3em solid $yellow;
             box-shadow: 2px 2px 2px -2px $yellow;
@@ -25,19 +26,16 @@
     }
 }
 
-@keyframes animaError{
-    from {
-        transform: translateX(20px);
-    }
-    to {
-        transform: translateX(10px);
-    }
+.error__text.remove {
+    transition-duration: 0.3s;
+    opacity: 0;
 }
 
-.error__text {
-    font-size: 1.5em;
-    font-weight: bolder;
-    &--skin {
-        color: $white;
+@keyframes animaError{
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(3px);
     }
 }
