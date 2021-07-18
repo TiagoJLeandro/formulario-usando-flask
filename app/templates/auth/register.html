@@ -5,24 +5,62 @@
     <fieldset class="fieldset fieldset--skin">
         {{form.hidden_tag()}}
         <legend class="form__legend form__legend--skin">
-            Cadastrar
+            Cadastrar-se
         </legend>
-        <label for="name" class="form__label form__label--skin">Nome:</label>
-        {{ form.name(class="form__entry form__entry--skin", id="name")}}
-        <label for="email" class="form__label form__label--skin">
-            Email:
-        </label>
-        {{form.email(class="form__entry form__entry--skin", id="email", autocomplete="off")}}
-        <label for="password" class="form__label form__label--skin">
-            Senha:
-        </label>
-        {{form.password(class="form__entry form__entry--skin", id="password")}}
-        <label for="password2" class="form__label form__label--skin">
-            Digite sua senha novamente:
-        </label>
-        {{form.password2(class='form__entry form__entry--skin', id="password2")}}
 
-        <input type="submit" value="Próximo >" class="btn btn--skin marginTop15">
+        <div class="steps steps--skin">
+            <span class="aba aba--skin active">1</span>
+            <span class="aba aba--skin">2</span>
+        </div>
+
+        <div class="wrapper-section">
+
+            <section class="section dados-pessoais section--active">
+
+                <label for="name" class="form__label form__label--skin">Nome:</label>
+                {{ form.name(class="form__entry form__entry--skin", id="name", autocomplete="off")}}
+                <label for="email" class="form__label form__label--skin">
+                    Email:
+                </label>
+                {{form.email(class="form__entry form__entry--skin", id="email", autocomplete="off")}}
+                <label for="password" class="form__label form__label--skin">
+                    Senha:
+                </label>
+                {{form.password(class="form__entry form__entry--skin", id="password")}}
+                <label for="password2" class="form__label form__label--skin">
+                    Digite sua senha novamente:
+                </label>
+                {{form.password2(class='form__entry form__entry--skin marginBottom10', id="password2")}}
+                
+                <input type="button" value="Próximo >" class="btn btn--skin" id="next">
+    
+            </section> <!-- /dados pessoais-->
+            
+            <section class="section endereco">
+                <label for="cep" class="form__label form__label--skin">Cep:</label>
+                {{ form.cep(class="form__entry form__entry--skin", id="cep", autocomplete="off")}}
+    
+                <label for="rua" class="form__label form__label--skin">Rua:</label>
+                {{ form.rua(class="form__entry form__entry--skin", id="rua", autocomplete="off")}}
+    
+                <label for="bairro" class="form__label form__label--skin">Bairro:</label>
+                {{ form.bairro(class="form__entry form__entry--skin", id="bairro", autocomplete="off")}}
+    
+                <label for="cidade" class="form__label form__label--skin">Cidade:</label>
+                {{ form.cidade(class="form__entry form__entry--skin", id="cidade", autocomplete="off")}}
+    
+                <label for="uf" class="form__label form__label--skin">UF:</label>
+                {{ form.uf(class="form__entry form__entry--skin marginBottom10", id="uf", autocomplete="off")}}
+    
+                <div class="wrapper_btn_nextPrev">
+                    <input type="button" value="<< Voltar" id="prev" class="btn btn--skin">
+                    <input type="submit" value="Finalizar" class="btn btn--skin">
+                </div>
+    
+            </section> <!-- /endereço-->
+        </div>
+
     </fieldset>
+
 </form>
 {% endblock %}
