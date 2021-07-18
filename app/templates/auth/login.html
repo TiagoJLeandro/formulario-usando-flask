@@ -4,7 +4,7 @@
 
 <form action="{{url_for('auth.login')}}" class="form form--skin" name="formLogin" method="POST">
     <fieldset class="fieldset fieldset--skin">
-        <legend class="form__legend form__legend--skin">Login</legend>
+        <legend class="form__legend form__legend--skin wid120px">Login</legend>
         {{form.hidden_tag()}}
         <label for="email" class="form__label form__label--skin">
             Email:
@@ -16,12 +16,12 @@
         {{form.password(id='password', class="form__entry form__entry--skin", autocomplete='off', minlength="3", maxlength="20")}}
         <label for="remember-me" class="form__label form__label--skin">
             Lembrar:
-            {{form.remember_me(type="checkbox", id="remember-me", value="true")}}
+            {{form.remember_me(type="checkbox", class="marginBottom10", id="remember-me", value="true")}}
         </label>
         <input class="btn btn--skin" type="submit" id="entrar" value="Entrar">
     </fieldset>
     <a href="{{url_for('auth.register')}}" class="external_link external_link--skin">
-        Novo usuário? Cadastrar...
+        Novo usuário? Inscrever-se.
     </a>
     {% for msg in get_flashed_messages() %}
         <div class="error error--skin">
