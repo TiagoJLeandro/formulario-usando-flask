@@ -35,6 +35,7 @@ export default function nextPrev(){
             removerMsgDeError($name);
         }
     }
+    
 
     let validarDadosPessoais = function(){
         validarName();
