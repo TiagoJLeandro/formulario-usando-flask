@@ -25,9 +25,15 @@ export default function nextPrev(){
         let emailValidado = $email.value
         .match(/^["a-z0-9_]+[.+-]?(?:[a-z]+)?[0-9a-z"_]@[a-z0-9\[](?:[a-z0-9-]+\.[a-z0-9]+\]?)+$/i);
         if (!emailValidado){
+            $email.classList.add("invalid")
+            removerMsgDeError($email);
             let text = "Digite um email válido.<br>Exemplo: exemplo@gmail.com";
             let btnFechar = "<button class='close'>x</button>";
             $email.insertAdjacentHTML("afterend", `<span class='error_form'>${text} ${btnFechar}</span>`)
+        }
+        else {
+            $email.classList.remove("invalid")
+            removerMsgDeError($email);
 
         }
     }
