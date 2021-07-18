@@ -20,14 +20,25 @@ export default function nextPrev(){
         }
     }
 
+    let validarEmail = function(){
+        let $email = document.formRegister.email;
+        let emailValidado = $email.value
+        .match(/^["a-z0-9_]+[.+-]?(?:[a-z]+)?[0-9a-z"_]@[a-z0-9\[](?:[a-z0-9-]+\.[a-z0-9]+\]?)+$/i);
+        if (!emailValidado){
+            let text = "Digite um email válido.<br>Exemplo: exemplo@gmail.com";
+            let btnFechar = "<button class='close'>x</button>";
+            $email.insertAdjacentHTML("afterend", `<span class='error_form'>${text} ${btnFechar}</span>`)
+
+        }
+    }
+
     let validarName = function(){
-        console.log("aqui");
         let $name = document.formRegister.name;
         if ($name.value.length > 128 || $name.value.length < 4){
             $name.classList.add("invalid");
             removerMsgDeError($name);
-            let text = "O nome precisa ter no mínimo 04, e no máximo 128 caractéres."
-            let btnFechar = "<button class='close'>x</button>"
+            let text = "O nome precisa ter no mínimo 04, e no máximo 128 caractéres.";
+            let btnFechar = "<button class='close'>x</button>";
             $name.insertAdjacentHTML("afterend", `<span class='error_form'>${text} ${btnFechar}</span>`)
         }
         else {
@@ -35,7 +46,7 @@ export default function nextPrev(){
             removerMsgDeError($name);
         }
     }
-    
+
 
     let validarDadosPessoais = function(){
         validarName();
@@ -79,6 +90,8 @@ export default function nextPrev(){
     window.addEventListener("click", (e) => {alterTable(e);})
     window.addEventListener("touchend", (e) => {alterTable(e);})
     const $name = document.forms.formRegister.name;
+    const $email = document.forms.formRegister.email;
     $name.addEventListener("change", validarName);
+    $email.addEventListener("change", validarEmail);
 
 }
