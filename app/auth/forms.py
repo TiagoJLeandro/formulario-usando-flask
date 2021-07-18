@@ -28,7 +28,7 @@ class RegisterForm(FlaskForm):
         ]
     )
     password2 = PasswordField(validators=[DataRequired()])
-    cep = StringField(validators=[DataRequired(), Length(9, 9)])
+    cep = StringField(validators=[DataRequired(), Length(8, 10)])
     rua = StringField(validators=[DataRequired(), Length(max=128)])
     bairro = StringField(validators=[DataRequired(), Length(max=128)])
     cidade = StringField(validators=[DataRequired(), Length(max=128)])
