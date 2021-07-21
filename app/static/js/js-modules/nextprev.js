@@ -34,7 +34,6 @@ export default function nextPrev(){
         else {
             $email.classList.remove("invalid")
             removerMsgDeError($email);
-
         }
     }
 
@@ -53,6 +52,19 @@ export default function nextPrev(){
         }
     }
 
+    let validarSenhas = function() {
+        if ($senha1.value !== $senha2.value) {
+            $senha2.classList.add("invalid");
+            removerMsgDeError($senha2);
+            let text = "As senhas precisam ser identicas.";
+            let btnFechar = "<button class='close'>x</button>";
+            $senha2.insertAdjacentHTML("afterend", `<span class='error_form'>${text} ${btnFechar}</span>`)
+        }
+        else {
+            $senha2.classList.remove("invalid");
+            removerMsgDeError($senha2);
+        }
+    }
 
     let validarDadosPessoais = function(){
         validarName();
@@ -97,6 +109,8 @@ export default function nextPrev(){
     window.addEventListener("touchend", (e) => {alterTable(e);})
     const $name = document.forms.formRegister.name;
     const $email = document.forms.formRegister.email;
+    const $senha1 = document.forms.formRegister.senha1;
+    const $senha2 = document.forms.formRegister.$senha2
     $name.addEventListener("change", validarName);
     $email.addEventListener("change", validarEmail);
 
