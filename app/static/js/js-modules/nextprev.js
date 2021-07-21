@@ -53,6 +53,7 @@ export default function nextPrev(){
     }
 
     let validarSenhas = function() {
+
         if ($senha1.value !== $senha2.value) {
             $senha2.classList.add("invalid");
             removerMsgDeError($senha2);
@@ -109,9 +110,10 @@ export default function nextPrev(){
     window.addEventListener("touchend", (e) => {alterTable(e);})
     const $name = document.forms.formRegister.name;
     const $email = document.forms.formRegister.email;
-    const $senha1 = document.forms.formRegister.senha1;
-    const $senha2 = document.forms.formRegister.$senha2
+    const $senha1 = document.forms.formRegister.password;
+    const $senha2 = document.forms.formRegister.password2;
     $name.addEventListener("change", validarName);
     $email.addEventListener("change", validarEmail);
+    $senha2.addEventListener("change", validarSenhas);
 
 }
