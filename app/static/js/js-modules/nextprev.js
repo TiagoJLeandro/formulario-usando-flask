@@ -72,13 +72,14 @@ export default function nextPrev(){
 
     let validarDadosPessoais = function(){
         let validacoes = [validarName(), validarSenhas(), validarEmail()]
-        if ( validacoes[0] || validacoes[1] || validacoes[2]  ){
+        if (validacoes[0] == 1|| validacoes[1] == 1 || validacoes[2] == 1){
             removerMsgDeError($btnNext);
             let text = "Dados inválidos. Por favor, corrija-os antes de prosseguir.";
             let btnFechar = "<button class='close'>x</button>";
             $btnNext.insertAdjacentHTML("afterend", `<span class='error_form'>${text} ${btnFechar}</span>`);
             return
         }
+        return 1
     }
 
     let alterTable = function(e){
