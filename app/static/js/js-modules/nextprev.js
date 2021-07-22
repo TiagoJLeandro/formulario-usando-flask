@@ -1,7 +1,7 @@
 export default function nextPrev(){
 
     let removerMsgDeError = function(e){
-        if (e.nextElementSibling.classList.contains("error_form")){
+        if (e.nextElementSibling && e.nextElementSibling.classList.contains("error_form")){
             let $next = e.nextElementSibling;
             $next.parentNode.removeChild($next);
         }
@@ -30,6 +30,7 @@ export default function nextPrev(){
             let text = "Digite um email válido.<br>Exemplo: exemplo@gmail.com";
             let btnFechar = "<button class='close'>x</button>";
             $email.insertAdjacentHTML("afterend", `<span class='error_form'>${text} ${btnFechar}</span>`)
+            return 1
         }
         else {
             $email.classList.remove("invalid")
@@ -45,6 +46,7 @@ export default function nextPrev(){
             let text = "O nome precisa ter no mínimo 04, e no máximo 128 caractéres.";
             let btnFechar = "<button class='close'>x</button>";
             $name.insertAdjacentHTML("afterend", `<span class='error_form'>${text} ${btnFechar}</span>`)
+            return 1
         }
         else {
             $name.classList.remove("invalid");
@@ -54,12 +56,13 @@ export default function nextPrev(){
 
     let validarSenhas = function() {
 
-        if ($senha1.value !== $senha2.value) {
+        if ($senha1.value !== $senha2.value || $senha1.value.trim().length == 0) {
             $senha2.classList.add("invalid");
             removerMsgDeError($senha2);
-            let text = "As senhas precisam ser identicas.";
+            let text = "As senhas precisam estar identicas e também não podem estar vazias.";
             let btnFechar = "<button class='close'>x</button>";
             $senha2.insertAdjacentHTML("afterend", `<span class='error_form'>${text} ${btnFechar}</span>`)
+            return 1
         }
         else {
             $senha2.classList.remove("invalid");
@@ -68,13 +71,21 @@ export default function nextPrev(){
     }
 
     let validarDadosPessoais = function(){
-        validarName();
+        let validacoes = [validarName(), validarSenhas(), validarEmail()]
+        if ( validacoes[0] || validacoes[1] || validacoes[2]  ){
+            removerMsgDeError($btnNext);
+            let text = "Dados inválidos. Por favor, corrija-os antes de prosseguir.";
+            let btnFechar = "<button class='close'>x</button>";
+            $btnNext.insertAdjacentHTML("afterend", `<span class='error_form'>${text} ${btnFechar}</span>`);
+            return
+        }
     }
 
     let alterTable = function(e){
 
         if (e.target.id == "next"){
             e.preventDefault();
+            if (!validarDadosPessoais()) { return};
             let sectionDadosPessoais = document.querySelector(".dados-pessoais");
             let sectionEndereco = document.querySelector(".endereco")
             let abaDadosPessoais = document.querySelectorAll(".aba")[0]
@@ -102,8 +113,6 @@ export default function nextPrev(){
         }
 
     }
-
-    
     window.addEventListener("click", (e) => {removerSuaveMsgDeError(e);})
     window.addEventListener("touchend", (e) => {removerSuaveMsgDeError(e);})
     window.addEventListener("click", (e) => {alterTable(e);})
@@ -112,8 +121,8 @@ export default function nextPrev(){
     const $email = document.forms.formRegister.email;
     const $senha1 = document.forms.formRegister.password;
     const $senha2 = document.forms.formRegister.password2;
+    const $btnNext = document.forms.formRegister.next;
     $name.addEventListener("change", validarName);
     $email.addEventListener("change", validarEmail);
     $senha2.addEventListener("change", validarSenhas);
-
 }
