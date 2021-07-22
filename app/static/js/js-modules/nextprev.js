@@ -5,7 +5,6 @@ export default function nextPrev(){
             let $next = e.nextElementSibling;
             $next.parentNode.removeChild($next);
         }
-
     }
 
     let removerSuaveMsgDeError = function(e){
