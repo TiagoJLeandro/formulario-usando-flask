@@ -18,19 +18,19 @@
             <section class="section dados-pessoais section--active">
 
                 <label for="name" class="form__label form__label--skin">Nome:</label>
-                {{ form.name(class="form__entry form__entry--skin", id="name", autocomplete="off")}}
+                {{ form.name(class="form__entry form__entry--skin", id="name", autocomplete="off", tabindex="0")}}
                 <label for="email" class="form__label form__label--skin">
                     Email:
                 </label>
-                {{form.email(class="form__entry form__entry--skin", id="email", autocomplete="off")}}
+                {{form.email(class="form__entry form__entry--skin", id="email", autocomplete="off", tabindex="1")}}
                 <label for="password" class="form__label form__label--skin">
                     Senha:
                 </label>
-                {{form.password(class="form__entry form__entry--skin", id="password")}}
+                {{form.password(class="form__entry form__entry--skin", id="password", tabindex="2")}}
                 <label for="password2" class="form__label form__label--skin">
                     Digite sua senha novamente:
                 </label>
-                {{form.password2(class='form__entry form__entry--skin marginBottom10', id="password2")}}
+                {{form.password2(class='form__entry form__entry--skin marginBottom10', id="password2", tabindex="3")}}
                 
                 <input type="button" value="Próximo >" class="btn btn--skin" id="next">
     
