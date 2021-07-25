@@ -27,7 +27,7 @@ export default function nextPrev(){
             $email.classList.add("invalid")
             removerMsgDeError($email);
             let text = "Digite um email válido.<br>Exemplo: exemplo@gmail.com";
-            let btnFechar = "<button class='close'>x</button>";
+            let btnFechar = "<span class='close'>x</span>";
             $email.insertAdjacentHTML("afterend", `<span class='error_form'>${text} ${btnFechar}</span>`)
             return 1
         }
@@ -37,7 +37,7 @@ export default function nextPrev(){
                 removerMsgDeError($email);
                 $email.classList.add("invalid")
                 let text = "Email já cadastrado.";
-                let btnFechar = "<button class='close'>x</button>";
+                let btnFechar = "<span class='close'>x</span>";
                 $email.insertAdjacentHTML("afterend", `<span class='error_form'>${text} ${btnFechar}</span>`)
                 return 1
             }
@@ -59,7 +59,7 @@ export default function nextPrev(){
             $name.classList.add("invalid");
             removerMsgDeError($name);
             let text = "O nome precisa ter no mínimo 04, e no máximo 128 caractéres.";
-            let btnFechar = "<button class='close'>x</button>";
+            let btnFechar = "<span class='close' tabindex='-10'>x</span>";
             $name.insertAdjacentHTML("afterend", `<span class='error_form'>${text} ${btnFechar}</span>`)
             return 1
         }
@@ -71,11 +71,11 @@ export default function nextPrev(){
 
     let validarSenhas = function() {
 
-        if ($senha1.value !== $senha2.value || $senha1.value.trim().length == 0) {
+        if ($senha1.value !== $senha2.value || $senha1.value.trim().length < 4) {
             $senha2.classList.add("invalid");
             removerMsgDeError($senha2);
-            let text = "As senhas precisam estar identicas e também não podem estar vazias.";
-            let btnFechar = "<button class='close'>x</button>";
+            let text = "As senhas precisam estar identicas e devem no mínimo ter 5 letras.";
+            let btnFechar = "<span class='close'>x</span>";
             $senha2.insertAdjacentHTML("afterend", `<span class='error_form'>${text} ${btnFechar}</span>`)
             return 1
         }
@@ -90,7 +90,7 @@ export default function nextPrev(){
         if (validacoes[0] == 1|| validacoes[1] == 1 || validacoes[2] == 1){
             removerMsgDeError($btnNext);
             let text = "Dados inválidos. Por favor, corrija-os antes de prosseguir.";
-            let btnFechar = "<button class='close'>x</button>";
+            let btnFechar = "<span class='close'>x</span>";
             $btnNext.insertAdjacentHTML("afterend", `<span class='error_form'>${text} ${btnFechar}</span>`);
             return 0
         }
