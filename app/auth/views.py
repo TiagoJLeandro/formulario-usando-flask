@@ -3,6 +3,7 @@ from flask import render_template, redirect, url_for, request, flash
 from flask_login import login_required, logout_user, login_user
 from .forms import LoginForm, RegisterForm
 from ..models import User
+from json import dumps
 
 
 @auth.route("/login", methods=["GET", "POST"])
@@ -34,4 +35,10 @@ def register():
     if form.validate_on_submit():
         pass
     return render_template("auth/register.html", form=form)
-    
+
+@auth.route("/verify_email", methods=["GET", "POST"])
+def verify_email():
+    email = request.form.get("email")
+    if email and User.query.filter_by(email=email).first():
+        return dumps({"email_encontrado": 1})
+    return dumps({"email_encontrado": 0})

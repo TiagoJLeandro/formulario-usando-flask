@@ -19,7 +19,7 @@ export default function nextPrev(){
         }
     }
 
-    let validarEmail = function(){
+    let validarEmail = async function(){
         let $email = document.formRegister.email;
         let emailValidado = $email.value
         .match(/^["a-z0-9_]+[.+-]?(?:[a-z]+)?[0-9a-z"_]@[a-z0-9\[](?:[a-z0-9-]+\.[a-z0-9]+\]?)+$/i);
@@ -32,9 +32,25 @@ export default function nextPrev(){
             return 1
         }
         else {
+            let emailExist = await verificaSeEmailExiste();
+            if (emailExist == 1){
+                removerMsgDeError($email);
+                $email.classList.add("invalid")
+                let text = "Email já cadastrado.";
+                let btnFechar = "<button class='close'>x</button>";
+                $email.insertAdjacentHTML("afterend", `<span class='error_form'>${text} ${btnFechar}</span>`)
+                return 1
+            }
             $email.classList.remove("invalid")
             removerMsgDeError($email);
         }
+    }
+
+    let verificaSeEmailExiste = async function(){
+        let form = new FormData(document.formRegister);
+        let dadosResponse = await fetch("/auth/verify_email", {method: "POST", body: form});
+        let dadosJson = await dadosResponse.json();
+        return dadosJson.email_encontrado;
     }
 
     let validarName = function(){
@@ -69,23 +85,24 @@ export default function nextPrev(){
         }
     }
 
-    let validarDadosPessoais = function(){
-        let validacoes = [validarName(), validarSenhas(), validarEmail()]
+    let validarDadosPessoais = async function(){
+        let validacoes = [validarName(), validarSenhas(), await validarEmail()];
         if (validacoes[0] == 1|| validacoes[1] == 1 || validacoes[2] == 1){
             removerMsgDeError($btnNext);
             let text = "Dados inválidos. Por favor, corrija-os antes de prosseguir.";
             let btnFechar = "<button class='close'>x</button>";
             $btnNext.insertAdjacentHTML("afterend", `<span class='error_form'>${text} ${btnFechar}</span>`);
-            return
+            return 0
         }
         return 1
     }
 
-    let alterTable = function(e){
+    let alterTable = async function(e){
 
         if (e.target.id == "next"){
             e.preventDefault();
-            if (!validarDadosPessoais()) { return};
+            if (! await validarDadosPessoais()){return};
+            removerMsgDeError($btnNext);
             let sectionDadosPessoais = document.querySelector(".dados-pessoais");
             let sectionEndereco = document.querySelector(".endereco")
             let abaDadosPessoais = document.querySelectorAll(".aba")[0]
