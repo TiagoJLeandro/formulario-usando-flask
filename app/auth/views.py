@@ -33,7 +33,10 @@ def logout():
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        pass
+        if User.query.filter_by(email=form.email.data).first():
+            flash("Email já cadastrado")
+            return redirect(url_for("auth.login"))
+
     return render_template("auth/register.html", form=form)
 
 @auth.route("/verify_email", methods=["GET", "POST"])
