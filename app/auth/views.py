@@ -2,7 +2,8 @@ from app.auth import auth
 from flask import render_template, redirect, url_for, request, flash
 from flask_login import login_required, logout_user, login_user
 from .forms import LoginForm, RegisterForm
-from ..models import User
+from ..models import User, Address
+from .. import db
 from json import dumps
 
 
@@ -36,6 +37,28 @@ def register():
         if User.query.filter_by(email=form.email.data).first():
             flash("Email já cadastrado")
             return redirect(url_for("auth.login"))
+        
+        user = User(
+            name=form.name.data,
+            email=form.email.data,
+            password=form.password.data
+        )
+        db.session.add(user)
+        db.session.commit()
+
+        address = Address(
+            user_id=user.id,
+            cep=form.cep.data,
+            rua=form.rua.data,
+            bairro=form.bairro.data,
+            cidade=form.cidade.data,
+            uf=form.uf.data
+        )
+
+        db.session.add(address)
+        db.session.commit()
+
+        return redirect(url_for("auth.login"))
 
     return render_template("auth/register.html", form=form)
 
