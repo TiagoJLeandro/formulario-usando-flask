@@ -1,0 +1,11 @@
+Querido {{user.username}}
+
+Bem-vindo ao site!
+
+Para confirmar sua conta, por favor clique no link a seguir:
+
+{{url_for('auth.confirm', token=token, _external=True)}}
+
+Att,
+
+Site.
