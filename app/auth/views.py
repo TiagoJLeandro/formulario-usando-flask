@@ -1,6 +1,6 @@
 from app.auth import auth
 from flask import render_template, redirect, url_for, request, flash
-from flask_login import login_required, logout_user, login_user
+from flask_login import login_required, logout_user, login_user, current_user
 from .forms import LoginForm, RegisterForm
 from ..models import User, Address
 from .. import db
@@ -78,3 +78,14 @@ def verify_email():
     if email and User.query.filter_by(email=email).first():
         return dumps({"email_encontrado": 1})
     return dumps({"email_encontrado": 0})
+
+
+@auth.route("/confirm/<token>")
+@login_required
+def confirm(token):
+    if current_user.enable:
+        return redirect(url_for("main.index"))
+    if current_user.confirm(token):
+        db.session.commit()
+        
+    return redirect(url_for("main.index"))
