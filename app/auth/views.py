@@ -4,6 +4,7 @@ from flask_login import login_required, logout_user, login_user
 from .forms import LoginForm, RegisterForm
 from ..models import User, Address
 from .. import db
+from ..email import send_email
 from json import dumps
 
 
@@ -45,7 +46,8 @@ def register():
         )
         db.session.add(user)
         db.session.commit()
-
+        token = user.generate_confirmation_token()
+        
         address = Address(
             user_id=user.id,
             cep=form.cep.data,
@@ -58,7 +60,15 @@ def register():
         db.session.add(address)
         db.session.commit()
 
-        return redirect(url_for("auth.login"))
+        send_email(
+            user.email,
+            'confirme sua conta',
+            'auth/email/confirm',
+            user=user,
+            token=token
+        )
+        
+        return redirect(url_for("main.index"))
 
     return render_template("auth/register.html", form=form)
 
